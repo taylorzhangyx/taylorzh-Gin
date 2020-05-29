@@ -3,17 +3,16 @@ package main
 import "github.com/gin-gonic/gin"
 
 func main() {
-	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
+	server := gin.Default()
+	server.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "hello world",
 		})
 	})
-
-	r.GET("/ping", func(c *gin.Context) {
+	server.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
 	})
-	r.Run(":2020")
+	server.Run(":2020")
 }
