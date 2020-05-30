@@ -4,9 +4,12 @@ import "github.com/gin-gonic/gin"
 
 func main() {
 	server := gin.Default()
+	count := 0
 	server.GET("/", func(c *gin.Context) {
+		count++
 		c.JSON(200, gin.H{
 			"message": "hello world",
+			"count":   count,
 		})
 	})
 	server.GET("/ping", func(c *gin.Context) {
@@ -14,5 +17,5 @@ func main() {
 			"message": "pong",
 		})
 	})
-	server.Run(":2020")
+	server.Run(":8080")
 }
