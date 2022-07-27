@@ -15,7 +15,7 @@ GO111MODULE=on CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
 funCheck
 
 echo "========== Docker Build =========="
-IMAGE="test-app"
+IMAGE="test-app-taylor-gin"
 TAG="v1.0.0"
 REGISTRY="ccr.ccs.tencentyun.com/tiemsdev"
 
