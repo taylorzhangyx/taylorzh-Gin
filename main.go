@@ -117,6 +117,7 @@ func main() {
 
 	s.GET("/load/metrics", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
+			"total":   loadtotal,
 			"message": loadMetrics,
 		})
 	})
