@@ -91,6 +91,7 @@ func main() {
 		})
 	})
 
+	var loadtotal int64
 	loadMetrics := make(map[int64]int64)
 	loadchan := make(chan int64, 10000)
 
@@ -99,6 +100,7 @@ func main() {
 			select {
 			case t := <-loadchan:
 				loadMetrics[t]++
+				loadtotal++
 			}
 		}
 	}()
@@ -121,6 +123,7 @@ func main() {
 
 	s.POST("/load/clear", func(c *gin.Context) {
 		loadMetrics = make(map[int64]int64)
+		loadtotal = 0
 		c.JSON(http.StatusOK, gin.H{
 			"message": "load metrics cleared",
 		})
