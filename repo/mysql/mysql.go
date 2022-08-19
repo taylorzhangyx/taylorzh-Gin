@@ -22,7 +22,7 @@ type Table interface {
 func Init(password, ip string, port int, name string) error {
 	var err error
 	once.Do(func() {
-		dsn := buildDbUrl("root", password, ip, port)
+		dsn := buildDbUrl("root", password, ip, port, name)
 		DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 		//	auto-migrate all the tables here.
@@ -38,11 +38,11 @@ func Init(password, ip string, port int, name string) error {
 	return err
 }
 
-func buildDbUrl(user, pwd, ip string, port int) string {
+func buildDbUrl(user, pwd, ip string, port int, name string) string {
 	s1 := strings.Join([]string{user, pwd}, ":")
 	s2 := strings.Join([]string{ip, strconv.Itoa(port)}, ":")
 	s3 := fmt.Sprintf("tcp(%v)", s2)
 	s4 := s1 + "@" + s3
 	s5 := strings.Join([]string{"charset=utf8mb4", "parseTime=True", "loc=Local"}, "&")
-	return fmt.Sprintf("%v/%v?%v", s4, "ti_env_db", s5)
+	return fmt.Sprintf("%v/%v?%v", s4, name, s5)
 }

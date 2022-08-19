@@ -14,14 +14,18 @@ import (
 	"taylorzh.dev.com/toy-gin/repo/mysql"
 )
 
-var dbPw = flag.String("dP", "*", "database pa")
-var dbN = flag.String("dn", "*", "database name")
-var dbPort = flag.Int("dp", 8080, "database port")
-var dbIp = flag.String("di", "*", "database ip")
+
 
 func main() {
+	dbPw := flag.String("dP", "*", "database pa")
+	dbN := flag.String("dn", "*", "database name")
+	dbPort := flag.Int("dp", 8080, "database port")
+	dbIp := flag.String("di", "*", "database ip")
+
+	flag.Parse()
+
 	println("starting taylorzh Gin Server...")
-	f, _ := os.Create("ti-env-manager-go.log")
+	f, _ := os.Create("server.log")
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 
 	gin.ForceConsoleColor()
@@ -42,7 +46,7 @@ func main() {
 	}))
 
 	InitBiz()
-	InitRepo()
+	InitRepo(*dbPw, *dbN, *dbPort, *dbIp)
 
 	s = api.SetupRouter(s)
 
@@ -53,9 +57,9 @@ func InitBiz() {
 	load_recorder.Init()
 }
 
-func InitRepo() {
+func InitRepo(pw, ip string, port int, schema string) {
 
-	err := mysql.Init(*dbPw, *dbIp, *dbPort, *dbN)
+	err := mysql.Init(pw, ip, port, schema)
 	if err != nil {
 		log.Fatalln("failed to init mysql", err.Error())
 	}
