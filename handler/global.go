@@ -29,5 +29,5 @@ func Hello(c *gin.Context) {
 
 // HealthCheck check
 func HealthCheck(c *gin.Context) {
-	c.String(http.StatusOK, fmt.Sprintf("OK 122234522 %v", time.Now().Format(time.RFC3339)))
+	c.String(http.StatusOK, fmt.Sprintf("OK %v", time.Now().Format(time.RFC3339)))
 }

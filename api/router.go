@@ -17,6 +17,11 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	v1 := r.Group("/v1")
 	{
 		v1.GET("/version", handler.Version)
+
+		// load test apis
+		v1.POST("/load/count", handler.LoadCount)
+		v1.GET("/load/metrics", handler.LoadMetrics)
+		v1.POST("/load/clear", handler.LoadClear)
 	}
 
 	return r

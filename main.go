@@ -14,8 +14,6 @@ import (
 	"taylorzh.dev.com/toy-gin/repo"
 )
 
-
-
 func main() {
 	dbPw := flag.String("dP", "*", "database pa")
 	dbN := flag.String("dn", "*", "database name")
