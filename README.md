@@ -51,3 +51,27 @@ make dev  # if you installed air
 
 make run  # if you don't have air
 ```
+
+check the server is running
+
+```shell
+curl localhost:8080/healthcheck
+# OK 2022-08-20T17:02:23+08:00
+```
+
+```shell
+curl localhost:8080/hello
+# {"count":1,"message":"hello world"}
+```
+
+# Feature List
+
+- load counter
+- async task runner
+
+## Load counter and metrics
+Sometimes we want to load test the performance of our backend service and to collect the request metrics of the service.
+These apis give you the metrics of the request in various dimensions.
+
+TODO
+ 
