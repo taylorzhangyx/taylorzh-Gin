@@ -1,4 +1,4 @@
-package mysql
+package repo
 
 import (
 	"fmt"
@@ -23,13 +23,16 @@ func Init(password, ip string, port int, name string) error {
 	var err error
 	once.Do(func() {
 		dsn := buildDbUrl("root", password, ip, port, name)
+
+		println(dsn)
+
 		DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 		//	auto-migrate all the tables here.
 		//	consider using api to expose table migrate feature
 		println("syncing db table...")
 
-		err := DB.AutoMigrate()
+		err := DB.AutoMigrate(&AsyncTask{})
 		if err != nil {
 			println("create table error", err)
 			return

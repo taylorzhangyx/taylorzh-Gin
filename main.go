@@ -11,7 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"taylorzh.dev.com/toy-gin/api"
 	"taylorzh.dev.com/toy-gin/biz/load_recorder"
-	"taylorzh.dev.com/toy-gin/repo/mysql"
+	"taylorzh.dev.com/toy-gin/repo"
 )
 
 
@@ -46,7 +46,7 @@ func main() {
 	}))
 
 	InitBiz()
-	InitRepo(*dbPw, *dbN, *dbPort, *dbIp)
+	InitRepo(*dbPw, *dbIp, *dbPort, *dbN)
 
 	s = api.SetupRouter(s)
 
@@ -59,7 +59,7 @@ func InitBiz() {
 
 func InitRepo(pw, ip string, port int, schema string) {
 
-	err := mysql.Init(pw, ip, port, schema)
+	err := repo.Init(pw, ip, port, schema)
 	if err != nil {
 		log.Fatalln("failed to init mysql", err.Error())
 	}
