@@ -10,6 +10,7 @@ And all the codes are original written by Yuxin Zhang ([taylorzyx@hotmail.com](h
 - [Air - Live reload for Go apps](https://github.com/cosmtrek/air)
 - [MySql](https://www.mysql.com/)
 - [GORM - The fantastic ORM library for Golang](https://gorm.io/)
+- [redis](https://redis.io/)
 
 # Before start
 A lot of components are used to make this server more complete and fancy. So be sure to install them as you needed.
@@ -42,6 +43,12 @@ Be sure to use it to shorten the feedback loop of the dev cycle.
 go install github.com/cosmtrek/air@latest
 ```
 
+### Redis
+
+```shell
+https://redis.io/docs/getting-started/
+```
+
 
 # Quick Start
 
@@ -68,6 +75,7 @@ curl localhost:8080/hello
 
 - load counter
 - async task runner
+- logger
 
 ## Load counter and metrics
 Sometimes we want to load test the performance of our backend service and to collect the request metrics of the service.
@@ -75,3 +83,8 @@ These apis give you the metrics of the request in various dimensions.
 
 TODO
  
+## Async Task Runner
+
+TODO
+
+## logger

@@ -22,6 +22,10 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 		v1.POST("/load/count", handler.LoadCount)
 		v1.GET("/load/metrics", handler.LoadMetrics)
 		v1.POST("/load/clear", handler.LoadClear)
+
+		// async task apis
+		v1.POST("/async/add", handler.AsyncTaskAdd)
+		v1.GET("/async/:taskId", handler.DescribeTaskResult)
 	}
 
 	return r

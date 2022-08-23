@@ -10,6 +10,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"taylorzh.dev.com/toy-gin/api"
+	"taylorzh.dev.com/toy-gin/biz/async_task"
 	"taylorzh.dev.com/toy-gin/biz/load_recorder"
 	"taylorzh.dev.com/toy-gin/repo"
 )
@@ -43,16 +44,19 @@ func main() {
 		)
 	}))
 
-	InitBiz()
 	InitRepo(*dbPw, *dbIp, *dbPort, *dbN)
+	InitBiz(repo.LocalConfig.AsyncTaskRunner)
 
 	s = api.SetupRouter(s)
 
 	s.Run(":8080")
 }
 
-func InitBiz() {
+func InitBiz(c *repo.AsyncTaskConfig) {
 	load_recorder.Init()
+	if err := async_task.Init(c.RedisIp, c.RedisPort); err == nil {
+		fmt.Println("async task is started and running...")
+	}
 }
 
 func InitRepo(pw, ip string, port int, schema string) {
